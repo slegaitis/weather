@@ -1,0 +1,126 @@
+@import './imports/index.scss';
+
+*,
+*:before,
+*:after {
+	@include border-box();
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	background: $white;
+	font: 400 rem($base-font) $font-family-others;
+	line-height: 1.3em;
+	height: 100%;
+	overflow-x: hidden;
+	position: relative;
+	width: 100%;
+	@include transition(opacity, .2s, linear);
+}
+
+h1 {
+	color: $textcolour;
+	font: 700 rem(30px) $font-family-headings;
+
+	.descriptor {
+		color: $textcolour;
+		display: block;
+		font: 400 rem(20px, 51px) $font-family-headings;
+		letter-spacing: 0.075em;
+		margin-bottom: -3px;
+	}
+
+	@include breakpoint(tablet) {
+		font-size: rem(35px);
+		letter-spacing: -0.045em;
+
+		.descriptor {
+			font-size: rem(18px, 35px);
+			margin-bottom: -10px;
+		}
+	}
+
+	@include breakpoint(desktop) {
+		font-size: rem(40px);
+
+		.descriptor {
+			font-size: rem(18px, 40px);
+			margin-bottom: -10px;
+		}
+	}
+}
+
+h2 {
+	@extend h1;
+	font-size: rem(22px);
+
+	.descriptor {
+		margin-bottom: 0;
+	}
+
+	@include breakpoint(tablet) {
+		font-size: rem(30px);
+		letter-spacing: -0.045em;
+
+		.descriptor {
+			font-size: rem(18px, 30px);
+		}
+	}
+}
+
+h3 {
+	@extend h1;
+	font-size: rem(20px);
+
+	@include breakpoint(tablet) {
+		font-size: rem(25px);
+	}
+}
+
+h4 {
+	@extend h1;
+	font-size: rem(18px);
+
+	@include breakpoint(tablet) {
+		font-size: rem(22px);
+		line-height: 1.25em;
+	}
+}
+
+h5 {
+	@extend h1;
+	font-size: rem(17px);
+
+	@include breakpoint(tablet) {
+		font-size: rem(19px);
+		line-height: 1.25em;
+	}
+}
+
+h6 {
+	@extend h1;
+	font-size: rem(16px);
+	line-height: 1.4em;
+
+	@include breakpoint(tablet) {
+		font-size: rem(21px);
+		line-height: 1.3em;
+	}
+}
+
+p {
+	color: $textcolour;
+	font: 400 rem(16px) $font-family-others;
+	letter-spacing: -0.04em;
+	line-height: 1.65em;
+
+	strong {
+		font-weight: bold;
+	}
+}
+
+header {
+	color: $dark;
+}

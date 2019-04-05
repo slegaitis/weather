@@ -1,0 +1,34 @@
+// colors
+$blue: #456990;
+$gray-blue: #8797af;
+$red: #f45b69;
+$dark: #202030;
+$white: #f5f3f5;
+$textcolour: $dark;
+
+// fonts
+$font-family-headings: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+$font-family-others: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+$base-font: 16px;
+
+// sizes
+$default-padding: 20px;
+$default-margin-bottom: 25px;
+
+// device sizes
+$tablet: 760px;
+$desktop: 1020px;
+$large-desktop: 1200px;
+
+@function rem($pixels, $context: $base-font) {
+	@if (unitless($pixels)) {
+		$pixels: $pixels * 1px;
+	}
+
+	@if (unitless($context)) {
+		$context: $context * 1px;
+	}
+
+	@return $pixels / $context * 1rem;
+}
