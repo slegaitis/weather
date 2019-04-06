@@ -1,10 +1,9 @@
 header {
 	background: $gray-blue;
-	margin-bottom: $default-margin-bottom;
 	padding: $default-padding;
-	text-align: center;
 
 	h1 {
 		color: $white;
+		font-size: rem(23px);
 	}
 }

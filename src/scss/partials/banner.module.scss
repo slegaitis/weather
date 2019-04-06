@@ -1,0 +1,28 @@
+@import '../imports/index.scss';
+
+.banner {
+	background: #ffffff;
+	height: 300px;
+	padding: 100px 20px;
+	text-align: center;
+
+	button,
+	input {
+		display: inline-block;
+		height: rem(35px);
+		margin: $default-margin;
+		padding: 0 15px;
+		vertical-align: middle;
+	}
+
+	button {
+		background: $blue;
+		border: 0;
+		outline: none;
+	}
+
+	@include breakpoint(tablet) {
+		height: 450px;
+		padding: 175px 20px 0;
+	}
+}

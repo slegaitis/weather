@@ -1,0 +1,1 @@
+export const UPDATE_GEOLOCATION = 'update_geolocation'

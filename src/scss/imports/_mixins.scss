@@ -231,6 +231,11 @@ $allprefixes: -webkit-, -moz-, -o-;
 	}
 }
 
+@mixin wrapper() {
+	margin: 0 auto;
+	max-width: 1100px;
+}
+
 //USE @extend %group; instead if not inside Media Query!
 @mixin group() {
 	*zoom: 1;
