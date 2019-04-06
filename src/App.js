@@ -1,6 +1,6 @@
 import React, { useReducer, useRef } from 'react';
 import './scss/base.scss';
-import { Geolocation } from './controllers/common';
+import { Geolocation, SetupApplication } from './controllers/common';
 import Header from './components/header';
 import Banner from './components/banner';
 import Selectors from './components/selectors';
@@ -20,16 +20,15 @@ export default function App() {
 	const [ state, dispatch ] = useReducer(AppReducer);
 
 	useEffectOnce(() => {
-		console.log('Effect ran once');
+		// prepare application
+		SetupApplication(dispatch);
 		Geolocation(dispatch);
 	});
 
 	return (
 		<div>
 			<Header />
-
 			<Banner />
-
 			<Selectors />
 		</div>
 	);
