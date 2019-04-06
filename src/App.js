@@ -1,6 +1,6 @@
-import React, {useReducer, useRef, useEffect} from 'react';
+import React, { useReducer, useRef } from 'react';
 import './scss/base.scss';
-import {Geolocation} from './controllers/common'
+import { Geolocation } from './controllers/common';
 import Header from './components/header';
 import Banner from './components/banner';
 import Selectors from './components/selectors';
@@ -8,29 +8,29 @@ import AppReducer from './controllers/reducers/app.reducer';
 
 // make useEffect only fire once
 function useEffectOnce(cb) {
-    const didRun = useRef(false)
+	const didRun = useRef(false);
 
-    if (!didRun.current) {
-        cb();
-        didRun.current = true;
-    }
+	if (!didRun.current) {
+		cb();
+		didRun.current = true;
+	}
 }
 
 export default function App() {
-    const [state,
-        dispatch] = useReducer(AppReducer, [])
+	const [ state, dispatch ] = useReducer(AppReducer);
 
-    useEffectOnce(() => {
-        Geolocation(dispatch)
-    })
+	useEffectOnce(() => {
+		console.log('Effect ran once');
+		Geolocation(dispatch);
+	});
 
-    return (
-        <div>
-            <Header/>
+	return (
+		<div>
+			<Header />
 
-            <Banner/>
+			<Banner />
 
-            <Selectors/>
-        </div>
-    );
+			<Selectors />
+		</div>
+	);
 }

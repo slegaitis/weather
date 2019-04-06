@@ -1,14 +1,22 @@
-import { UPDATE_GEOLOCATION } from '../../types/app.types';
+import { UPDATE_GEOLOCATION, UPDATE_SEARCHED_LOCATIONS } from '../../constants';
+
+export function updateSearchedLocations(dispatch, cityname) {
+	const action = {
+		payload: cityname,
+		type: UPDATE_SEARCHED_LOCATIONS
+	};
+
+	dispatch(action);
+}
 
 export function updateGeolocation(dispatch, position) {
 	const action = {
 		payload: {
 			latitude: position.latitude,
-			longtitude: position.longitude
+			longitude: position.longitude
 		},
 		type: UPDATE_GEOLOCATION
 	};
 
-	console.log(action);
 	dispatch(action);
 }
