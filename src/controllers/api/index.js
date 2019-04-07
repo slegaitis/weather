@@ -13,6 +13,7 @@ export function getCountryList() {
 }
 
 export function getWeatherByCoords(latitude, longitude) {
-	let url = WEATHER_API + 'lat=' + latitude + '&lon=' + longitude + '&appid=1c345fafe0e4bd7b3c916afbc23d0507';
+	console.log(latitude, longitude);
+	let url = WEATHER_API + latitude + ',' + longitude;
 	return api.get(url);
 }

@@ -4,7 +4,7 @@ import { GetCoordsCtrl, SetupApplicationCtrl } from './controllers/common';
 import Header from './components/header';
 import Banner from './components/banner';
 import Options from './components/options';
-import AppReducer from './controllers/state/reducers/app.reducer';
+import AppReducer, { appInitialState } from './controllers/state/reducers/app.reducer';
 import { AppContext } from './controllers/state/context';
 
 // make useEffect only fire once
@@ -16,15 +16,6 @@ function useEffectOnce(cb) {
 		didRun.current = true;
 	}
 }
-
-export const appInitialState = {
-	currentLocation: {
-		latitude: 0,
-		longitude: 0
-	},
-	searchedLocations: [],
-	countries: []
-};
 
 export default function App() {
 	const [ state, dispatch ] = useReducer(AppReducer, appInitialState);

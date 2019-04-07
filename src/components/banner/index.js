@@ -1,18 +1,14 @@
-import React, { useRef, useReducer } from 'react';
+import React, { useRef, useContext } from 'react';
 import styles from '../../scss/partials/banner.module.scss';
-import AppReducer from '../../controllers/state/reducers/app.reducer';
-import { updateSearchedLocations } from '../../controllers/actions/app.actions';
-import { appInitialState } from '../../App';
+import { AppContext } from '../../controllers/state/context';
 
 export default function Banner() {
+	const { state, dispatch } = useContext(AppContext);
 	const cityNameRef = useRef();
-	const [ state, dispatch ] = useReducer(AppReducer, appInitialState);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		let cityName = cityNameRef.current.value;
-
-		updateSearchedLocations(dispatch, cityName);
 	};
 
 	return (

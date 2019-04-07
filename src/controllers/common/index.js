@@ -1,19 +1,26 @@
-import { updateGeolocation } from '../actions/app.actions';
-import { appInitialState } from '../../App';
 import { APP_STATE, SETUP_APP_STATE } from '../../constants';
-import { getCountryList } from '../api';
+import { getCountryList, getWeatherByCoords } from '../api';
+import { appInitialState } from '../state/reducers/app.reducer';
+import { updateGeolocationAction } from '../state/actions/app.actions';
 
 export function GetCoordsCtrl(dispatch) {
+	// check if geolocation is supported/enabled on current browser
 	if ('geolocation' in navigator) {
-		// check if geolocation is supported/enabled on current browser
 		navigator.geolocation.getCurrentPosition(function(position) {
-			updateGeolocation(dispatch, position.coords);
+			GetWeatherForCoordsCtrl(dispatch, position.coords);
 		});
 	} else {
-		// geolocation is not supported get your location some other way
 		console.log('geolocation is not enabled on this browser');
-		// TODO: we could potentially make a call to an api as secondary option
+		// TODO: we could potentially make a call to an api as secondary option if geolocation is not supported
 	}
+}
+
+export function GetWeatherForCoordsCtrl(dispatch, position) {
+	getWeatherByCoords(position.latitude, position.longitude)
+		.then((res) => {
+			updateGeolocationAction(dispatch, position, res.data);
+		})
+		.catch((e) => console.error(e));
 }
 
 export function SetupApplicationCtrl(dispatch) {

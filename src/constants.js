@@ -1,9 +1,10 @@
 // Reducer action types
-export const UPDATE_GEOLOCATION = 'update_geolocation';
+export const UPDATE_WEATHER_FROM_COORDS = 'update_weather_from_coords';
 export const UPDATE_SEARCHED_LOCATIONS = 'update_searched_locations';
 export const UPDATE_COUNTRY_LIST = 'update_country_list';
 export const SETUP_APP_STATE = 'setup_app_state';
+export const UPDATE_WEATHER = 'update_weather';
 
 // app constants
 export const APP_STATE = 'app_state';
-export const WEATHER_API = 'https://api.openweathermap.org/data/2.5/weather?';
+export const WEATHER_API = 'http://api.apixu.com/v1/current.json?key=02913f4a1f25408c97e125603172507&q=';

@@ -1,21 +1,16 @@
-import { UPDATE_GEOLOCATION, UPDATE_SEARCHED_LOCATIONS } from '../../constants';
+import { UPDATE_WEATHER_FROM_COORDS } from '../../../constants';
 
-export function updateSearchedLocations(dispatch, cityname) {
-	const action = {
-		payload: cityname,
-		type: UPDATE_SEARCHED_LOCATIONS
-	};
-
-	dispatch(action);
-}
-
-export function updateGeolocation(dispatch, latitude, longitude) {
+export function updateGeolocationAction(dispatch, coords, weatherData) {
 	const action = {
 		payload: {
-			latitude: latitude,
-			longitude: longitude
+			coords: {
+				latitude: coords.latitude,
+				longitude: coords.longitude
+			},
+			weather: weatherData.current,
+			location: weatherData.location
 		},
-		type: UPDATE_GEOLOCATION
+		type: UPDATE_WEATHER_FROM_COORDS
 	};
 
 	dispatch(action);
