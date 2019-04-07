@@ -2,15 +2,15 @@
 
 .banner {
 	background: #ffffff;
-	height: 300px;
-	padding: 100px 20px;
+	height: 320px;
+	padding: 20px 20px;
 	text-align: center;
 
 	button,
 	input {
 		display: inline-block;
 		height: rem(35px);
-		margin: $default-margin;
+		margin: 10px;
 		padding: 0 15px;
 		vertical-align: middle;
 	}
@@ -22,7 +22,51 @@
 	}
 
 	@include breakpoint(tablet) {
-		height: 450px;
-		padding: 175px 20px 0;
+		height: 400px;
+		padding: 100px 20px 0;
+	}
+}
+
+.weather {
+	background: rgba($white, 0.3);
+	margin: 20px auto 0;
+	max-width: 700px;
+	padding: $default-padding 10px;
+
+	*zoom: 1;
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+.weatherDesc {
+	float: left;
+	width: 50%;
+
+	h2 {
+		font-size: rem(17px);
+		margin: 0 0 10px;
+	}
+
+	p {
+		font-size: rem(14px);
+	}
+}
+
+.weatherInfo {
+	float: right;
+	width: 50%;
+
+	@include breakpoint(tablet) {
+		h3,
+		img {
+			display: inline-block;
+			vertical-align: middle;
+		}
 	}
 }
