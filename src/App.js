@@ -6,6 +6,7 @@ import Banner from './components/banner';
 import Options from './components/options';
 import AppReducer, { appInitialState } from './controllers/state/reducers/app.reducer';
 import { AppContext } from './controllers/state/context';
+import { setLoading } from './controllers/state/actions/app.actions';
 
 // make useEffect only fire once
 function useEffectOnce(cb) {
@@ -21,6 +22,7 @@ export default function App() {
 	const [ state, dispatch ] = useReducer(AppReducer, appInitialState);
 
 	useEffectOnce(() => {
+		setLoading(dispatch, true);
 		// prepare application
 		SetupApplicationCtrl(dispatch);
 		GetCoordsCtrl(dispatch);

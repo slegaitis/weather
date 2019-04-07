@@ -1,4 +1,18 @@
-import { UPDATE_WEATHER_FROM_COORDS, UPDATE_WEATHER_FROM_STRING, UPDATE_SEARCHED_LOCATIONS } from '../../../constants';
+import {
+	UPDATE_WEATHER_FROM_COORDS,
+	UPDATE_WEATHER_FROM_STRING,
+	UPDATE_SEARCHED_LOCATIONS,
+	SET_LOADING
+} from '../../../constants';
+
+export function setLoading(dispatch, isLoading) {
+	let loading = {
+		type: SET_LOADING,
+		payload: isLoading
+	};
+
+	dispatch(loading);
+}
 
 export function updateGeolocationAction(dispatch, coords, weatherData) {
 	const action = {
