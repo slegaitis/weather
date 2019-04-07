@@ -1,10 +1,17 @@
-import { UPDATE_WEATHER_FROM_COORDS, UPDATE_SEARCHED_LOCATIONS, SETUP_APP_STATE } from '../../../constants';
+import {
+	UPDATE_WEATHER_FROM_COORDS,
+	UPDATE_SEARCHED_LOCATIONS,
+	SETUP_APP_STATE,
+	UPDATE_LOCATION_NAME,
+	UPDATE_WEATHER_FROM_STRING
+} from '../../../constants';
 
 export const appInitialState = {
-	locationCoords: {
+	coords: {
 		latitude: 0,
 		longitude: 0
 	},
+	locationName: '',
 	weather: {},
 	location: {},
 	searchedLocations: [],
@@ -18,10 +25,18 @@ export default function AppReducer(state, action) {
 			// copy old state and store only unique values within searchedLocations (no duplicates)
 			return { ...state, searchedLocations: [ ...new Set(locations) ] };
 
+		case UPDATE_WEATHER_FROM_STRING:
+			return {
+				...state,
+				locationName: action.payload.locationName,
+				weather: action.payload.weather,
+				location: action.payload.location
+			};
+
 		case UPDATE_WEATHER_FROM_COORDS:
 			return {
 				...state,
-				locationCoords: {
+				coords: {
 					latitude: action.payload.coords.latitude,
 					longitude: action.payload.coords.longitude
 				},

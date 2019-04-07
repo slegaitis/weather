@@ -3,7 +3,7 @@
 .banner {
 	background: #ffffff;
 	height: 320px;
-	padding: 20px 20px;
+	position: relative;
 	text-align: center;
 
 	button,
@@ -21,14 +21,35 @@
 		outline: none;
 	}
 
+	& + div {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
 	@include breakpoint(tablet) {
 		height: 400px;
-		padding: 100px 20px 0;
+	}
+}
+
+.weatherOverlay {
+	bottom: 0;
+	left: 15px;
+	margin: auto;
+	position: absolute;
+	right: 15px;
+	top: 30px;
+	z-index: 2;
+
+	@include breakpoint(tablet) {
+		top: 75px;
 	}
 }
 
 .weather {
-	background: rgba($white, 0.3);
+	background: rgba($blue, 0.2);
 	margin: 20px auto 0;
 	max-width: 700px;
 	padding: $default-padding 10px;

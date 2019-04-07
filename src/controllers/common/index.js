@@ -1,7 +1,7 @@
 import { APP_STATE, SETUP_APP_STATE } from '../../constants';
-import { getCountryList, getWeatherByCoords } from '../api';
+import { getCountryList, getWeatherByCoords, getWeatherByName } from '../api';
 import { appInitialState } from '../state/reducers/app.reducer';
-import { updateGeolocationAction } from '../state/actions/app.actions';
+import { updateGeolocationAction, updateWeatherBasedOnName } from '../state/actions/app.actions';
 
 export function GetCoordsCtrl(dispatch) {
 	// check if geolocation is supported/enabled on current browser
@@ -23,6 +23,16 @@ export function GetWeatherForCoordsCtrl(dispatch, position) {
 		.catch((e) => console.error(e));
 }
 
+export function GetWeatherByString(dispatch, name) {
+	getWeatherByName(name)
+		.then((res) => {
+			updateWeatherBasedOnName(dispatch, res.data, name);
+		})
+		.catch((e) => {
+			console.error(e);
+		});
+}
+
 export function SetupApplicationCtrl(dispatch) {
 	let storage = localStorage.getItem(APP_STATE);
 	if (!storage) {
@@ -32,6 +42,7 @@ export function SetupApplicationCtrl(dispatch) {
 				...appInitialState,
 				countries: countryNames
 			};
+			dispatch({ type: SETUP_APP_STATE, payload: initialState });
 			localStorage.setItem(APP_STATE, JSON.stringify(initialState));
 		});
 	} else {

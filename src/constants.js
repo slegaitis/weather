@@ -1,9 +1,8 @@
 // Reducer action types
 export const UPDATE_WEATHER_FROM_COORDS = 'update_weather_from_coords';
 export const UPDATE_SEARCHED_LOCATIONS = 'update_searched_locations';
-export const UPDATE_COUNTRY_LIST = 'update_country_list';
 export const SETUP_APP_STATE = 'setup_app_state';
-export const UPDATE_WEATHER = 'update_weather';
+export const UPDATE_WEATHER_FROM_STRING = 'update_weather_from_string';
 
 // app constants
 export const APP_STATE = 'app_state';

@@ -13,7 +13,9 @@ export function getCountryList() {
 }
 
 export function getWeatherByCoords(latitude, longitude) {
-	console.log(latitude, longitude);
-	let url = WEATHER_API + latitude + ',' + longitude;
-	return api.get(url);
+	return api.get(WEATHER_API + latitude + ',' + longitude);
+}
+
+export function getWeatherByName(name) {
+	return api.get(WEATHER_API + name);
 }
