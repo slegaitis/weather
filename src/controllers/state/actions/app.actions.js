@@ -9,11 +9,11 @@ export function updateSearchedLocations(dispatch, cityname) {
 	dispatch(action);
 }
 
-export function updateGeolocation(dispatch, position) {
+export function updateGeolocation(dispatch, latitude, longitude) {
 	const action = {
 		payload: {
-			latitude: position.latitude,
-			longitude: position.longitude
+			latitude: latitude,
+			longitude: longitude
 		},
 		type: UPDATE_GEOLOCATION
 	};

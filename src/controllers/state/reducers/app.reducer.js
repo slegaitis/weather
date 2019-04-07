@@ -1,15 +1,7 @@
-import { UPDATE_GEOLOCATION, UPDATE_SEARCHED_LOCATIONS, SETUP_APP_STATE } from '../../constants';
+import { UPDATE_GEOLOCATION, UPDATE_SEARCHED_LOCATIONS, SETUP_APP_STATE } from '../../../constants';
 
-export const appInitialState = {
-	currentLocation: {
-		latitude: 0,
-		longitude: 0
-	},
-	searchedLocations: [],
-	countries: []
-};
-
-export default function AppReducer(state = appInitialState, action) {
+export default function AppReducer(state, action) {
+	console.log(state);
 	switch (action.type) {
 		case UPDATE_SEARCHED_LOCATIONS:
 			let locations = [ action.payload, ...state.searchedLocations ];
@@ -20,13 +12,13 @@ export default function AppReducer(state = appInitialState, action) {
 				...state,
 				currentLocation: { latitude: action.payload.latitude, longitude: action.payload.longitude }
 			};
-
 		case SETUP_APP_STATE:
 			return {
 				...state,
 				...action.payload
 			};
 		default:
-			console.log('Default', action);
+			console.log(action);
+			throw new Error('Invalid action passed');
 	}
 }

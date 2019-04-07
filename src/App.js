@@ -1,10 +1,11 @@
 import React, { useReducer, useRef } from 'react';
 import './scss/base.scss';
-import { Geolocation, SetupApplication } from './controllers/common';
+import { GetCoordsCtrl, SetupApplicationCtrl } from './controllers/common';
 import Header from './components/header';
 import Banner from './components/banner';
-import Selectors from './components/selectors';
-import AppReducer from './controllers/reducers/app.reducer';
+import Options from './components/options';
+import AppReducer from './controllers/state/reducers/app.reducer';
+import { AppContext } from './controllers/state/context';
 
 // make useEffect only fire once
 function useEffectOnce(cb) {
@@ -16,20 +17,29 @@ function useEffectOnce(cb) {
 	}
 }
 
+export const appInitialState = {
+	currentLocation: {
+		latitude: 0,
+		longitude: 0
+	},
+	searchedLocations: [],
+	countries: []
+};
+
 export default function App() {
-	const [ state, dispatch ] = useReducer(AppReducer);
+	const [ state, dispatch ] = useReducer(AppReducer, appInitialState);
 
 	useEffectOnce(() => {
 		// prepare application
-		SetupApplication(dispatch);
-		Geolocation(dispatch);
+		SetupApplicationCtrl(dispatch);
+		GetCoordsCtrl(dispatch);
 	});
 
 	return (
-		<div>
+		<AppContext.Provider value={{ state, dispatch }}>
 			<Header />
 			<Banner />
-			<Selectors />
-		</div>
+			<Options />
+		</AppContext.Provider>
 	);
 }
