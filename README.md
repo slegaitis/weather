@@ -1,6 +1,3 @@
-Demo: https://slegaitis.github.io/weather/.
-
-
 ## Available Scripts
 
 In the project directory, you can run:
