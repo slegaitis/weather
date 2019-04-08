@@ -33,6 +33,7 @@ export function GetWeatherByString(dispatch, name) {
 		});
 }
 
+// TODO: Move dispatch to action. Controller should call action which dispatches events
 export function SetupApplicationCtrl(dispatch) {
 	let storage = localStorage.getItem(APP_STATE);
 	if (!storage) {
