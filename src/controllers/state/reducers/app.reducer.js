@@ -27,7 +27,7 @@ export default function AppReducer(state, action) {
 			return { ...state, loading: action.payload };
 
 		case UPDATE_SEARCHED_LOCATIONS:
-			let locations = [ action.payload, ...state.searchedLocations ];
+			let locations = [ ...state.searchedLocations, action.payload ];
 			// copy old state and store only unique values within searchedLocations (no duplicates)
 			return { ...state, searchedLocations: [ ...new Set(locations) ], loading: false };
 
