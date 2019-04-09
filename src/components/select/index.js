@@ -3,7 +3,7 @@ import { AppContext } from '../../controllers/state/context';
 import { GetWeatherByStringCtrl } from '../../controllers/common';
 
 const Select = (props) => {
-	const { state, dispatch } = useContext(AppContext);
+	const { dispatch } = useContext(AppContext);
 	const randomID = Math.random().toString(36).substr(2, 5);
 
 	const locationName = useRef();
