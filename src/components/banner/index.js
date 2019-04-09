@@ -13,9 +13,11 @@ export default function Banner() {
 		event.preventDefault();
 		let cityName = cityNameRef.current.value;
 
-		GetWeatherByStringCtrl(dispatch, cityName);
+		if (cityName.length >= 3) {
+			GetWeatherByStringCtrl(dispatch, cityName);
 
-		cityNameRef.current.value = '';
+			cityNameRef.current.value = '';
+		}
 	};
 
 	return (

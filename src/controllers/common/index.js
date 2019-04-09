@@ -35,7 +35,10 @@ export function GetWeatherForCoordsCtrl(dispatch, position) {
 		.then((res) => {
 			updateGeolocationAction(dispatch, position, res.data);
 		})
-		.catch((e) => ToastsStore.error('Error unable to find weather for this location now'));
+		.catch((e) => {
+			ToastsStore.error('Error unable to find weather for this location now');
+			setLoading(dispatch, false);
+		});
 }
 
 export function GetWeatherByStringCtrl(dispatch, name) {
@@ -45,7 +48,10 @@ export function GetWeatherByStringCtrl(dispatch, name) {
 			console.log(res.data.current);
 			updateWeatherBasedOnName(dispatch, res.data, name);
 		})
-		.catch((e) => ToastsStore.error('Error unable to find weather for this location now'));
+		.catch((e) => {
+			ToastsStore.error('Error unable to find weather for this location now');
+			setLoading(dispatch, false);
+		});
 }
 
 export function SetupApplicationCtrl(dispatch) {
