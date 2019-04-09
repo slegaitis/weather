@@ -4,6 +4,7 @@ export const UPDATE_SEARCHED_LOCATIONS = 'update_searched_locations';
 export const SETUP_APP_STATE = 'setup_app_state';
 export const UPDATE_WEATHER_FROM_STRING = 'update_weather_from_string';
 export const SET_LOADING = 'set_loading';
+export const DISABLE_CURRENT_LOCATION = 'disable_current_location';
 
 // app constants
 export const APP_STATE = 'app_state';

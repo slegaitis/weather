@@ -8,23 +8,24 @@ export default function Options() {
 	const { state, dispatch } = useContext(AppContext);
 
 	const getCurrentLocation = () => {
-		console.log(state);
 		GetCoordsCtrl(dispatch);
 	};
 
 	return (
 		<ul className={styles.selectors}>
 			<li>
-				<Select list={state.countries} />
+				<Select list={state.countries} label="Select by country" />
 			</li>
 			{state.searchedLocations.length > 1 && (
 				<li>
-					<Select list={state.searchedLocations} />
+					<Select list={state.searchedLocations} label="Searched locations" />
 				</li>
 			)}
-			<li>
-				<button onClick={() => getCurrentLocation()}>Current location</button>
-			</li>
+			{state.currentLocationEnabled && (
+				<li>
+					<button onClick={() => getCurrentLocation()}>Current location</button>
+				</li>
+			)}
 		</ul>
 	);
 }

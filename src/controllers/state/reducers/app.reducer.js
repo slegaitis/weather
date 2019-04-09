@@ -3,19 +3,21 @@ import {
 	UPDATE_SEARCHED_LOCATIONS,
 	SETUP_APP_STATE,
 	UPDATE_WEATHER_FROM_STRING,
-	SET_LOADING
+	SET_LOADING,
+	DISABLE_CURRENT_LOCATION
 } from '../../../constants';
 
 export const appInitialState = {
 	coords: {
-		latitude: 0,
-		longitude: 0
+		latitude: 54.6872,
+		longitude: 25.2797
 	},
 	locationName: '',
 	weather: {},
 	location: {},
 	searchedLocations: [],
 	countries: [],
+	currentLocationEnabled: true,
 	loading: true
 };
 
@@ -32,6 +34,10 @@ export default function AppReducer(state, action) {
 		case UPDATE_WEATHER_FROM_STRING:
 			return {
 				...state,
+				coords: {
+					latitude: action.payload.location.lat,
+					longitude: action.payload.location.lon
+				},
 				locationName: action.payload.locationName,
 				weather: action.payload.weather,
 				location: action.payload.location,
@@ -55,6 +61,12 @@ export default function AppReducer(state, action) {
 				...state,
 				...action.payload,
 				loading: false
+			};
+
+		case DISABLE_CURRENT_LOCATION:
+			return {
+				...state,
+				currentLocationEnabled: action.payload
 			};
 
 		default:

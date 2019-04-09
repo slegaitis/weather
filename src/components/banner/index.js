@@ -1,9 +1,8 @@
 import React, { useRef, useContext } from 'react';
 import styles from '../../scss/partials/banner.module.scss';
 import { AppContext } from '../../controllers/state/context';
-import { GetWeatherByString } from '../../controllers/common';
+import { GetWeatherByStringCtrl } from '../../controllers/common';
 import Maps from '../maps';
-import { setLoading } from '../../controllers/state/actions/app.actions';
 import Loading from '../loading';
 
 export default function Banner() {
@@ -14,19 +13,22 @@ export default function Banner() {
 		event.preventDefault();
 		let cityName = cityNameRef.current.value;
 
-		setLoading(dispatch, true);
-		GetWeatherByString(dispatch, cityName);
+		GetWeatherByStringCtrl(dispatch, cityName);
+
+		cityNameRef.current.value = '';
 	};
 
 	return (
 		<section className={styles.banner}>
-			{state.loading ? (
+			{state.loading && state.lacationName ? (
 				<Loading />
 			) : (
 				<React.Fragment>
+					{state.loading && <Loading />}
 					<Maps coords={state.coords} />
+
 					<div className={styles.weatherOverlay}>
-						<form onSubmit={handleSubmit}>
+						<form onSubmit={(event) => handleSubmit(event)}>
 							<input type="text" placeholder="Enter city name..." ref={cityNameRef} />
 							<button type="submit">Search</button>
 						</form>

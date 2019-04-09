@@ -7,6 +7,7 @@ import Options from './components/options';
 import AppReducer, { appInitialState } from './controllers/state/reducers/app.reducer';
 import { AppContext } from './controllers/state/context';
 import { setLoading } from './controllers/state/actions/app.actions';
+import { ToastsContainer, ToastsStore } from 'react-toasts'; //TODO: this lib is too big (find better solution)
 
 // make useEffect only fire once
 function useEffectOnce(cb) {
@@ -33,6 +34,7 @@ export default function App() {
 			<Header />
 			<Banner />
 			<Options />
+			<ToastsContainer store={ToastsStore} />
 		</AppContext.Provider>
 	);
 }

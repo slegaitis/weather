@@ -1,14 +1,27 @@
-import { APP_STATE, SETUP_APP_STATE } from '../../constants';
+import { APP_STATE } from '../../constants';
 import { getCountryList, getWeatherByCoords, getWeatherByName } from '../api';
 import { appInitialState } from '../state/reducers/app.reducer';
-import { updateGeolocationAction, updateWeatherBasedOnName } from '../state/actions/app.actions';
+import {
+	updateGeolocationAction,
+	updateWeatherBasedOnName,
+	setupAppState,
+	setLoading,
+	currentLocationEnabled
+} from '../state/actions/app.actions';
+import { ToastsStore } from 'react-toasts'; // TODO: this lib is too big (find better solution)
 
 export function GetCoordsCtrl(dispatch) {
 	// check if geolocation is supported/enabled on current browser
 	if ('geolocation' in navigator) {
-		navigator.geolocation.getCurrentPosition(function(position) {
-			GetWeatherForCoordsCtrl(dispatch, position.coords);
-		});
+		navigator.geolocation.getCurrentPosition(
+			function(position) {
+				GetWeatherForCoordsCtrl(dispatch, position.coords);
+			},
+			function(error) {
+				console.log(error);
+				currentLocationEnabled(dispatch, false);
+			}
+		);
 	} else {
 		console.log('geolocation is not enabled on this browser');
 		// TODO: we could potentially make a call to an api as secondary option if geolocation is not supported
@@ -16,24 +29,25 @@ export function GetCoordsCtrl(dispatch) {
 }
 
 export function GetWeatherForCoordsCtrl(dispatch, position) {
+	setLoading(dispatch, true);
+
 	getWeatherByCoords(position.latitude, position.longitude)
 		.then((res) => {
 			updateGeolocationAction(dispatch, position, res.data);
 		})
-		.catch((e) => console.error(e));
+		.catch((e) => ToastsStore.error('Error unable to find weather for this location now'));
 }
 
-export function GetWeatherByString(dispatch, name) {
+export function GetWeatherByStringCtrl(dispatch, name) {
+	setLoading(dispatch, true);
 	getWeatherByName(name)
 		.then((res) => {
+			console.log(res.data.current);
 			updateWeatherBasedOnName(dispatch, res.data, name);
 		})
-		.catch((e) => {
-			console.error(e);
-		});
+		.catch((e) => ToastsStore.error('Error unable to find weather for this location now'));
 }
 
-// TODO: Move dispatch to action. Controller should call action which dispatches events
 export function SetupApplicationCtrl(dispatch) {
 	let storage = localStorage.getItem(APP_STATE);
 	if (!storage) {
@@ -41,12 +55,12 @@ export function SetupApplicationCtrl(dispatch) {
 			const countryNames = response.data.map((item) => item.name.toLowerCase());
 			const initialState = {
 				...appInitialState,
-				countries: countryNames
+				countries: [ ...countryNames ]
 			};
-			dispatch({ type: SETUP_APP_STATE, payload: initialState });
 			localStorage.setItem(APP_STATE, JSON.stringify(initialState));
+			setupAppState(dispatch, initialState);
 		});
 	} else {
-		dispatch({ type: SETUP_APP_STATE, payload: JSON.parse(storage) });
+		setupAppState(dispatch, JSON.parse(storage));
 	}
 }

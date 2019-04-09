@@ -21,6 +21,11 @@
 			text-transform: capitalize;
 		}
 
+		label {
+			font: 700 rem(10px) $font-family-headings;
+			color: lighten($dark, 25);
+		}
+
 		button {
 			background: $blue;
 			margin: 0;

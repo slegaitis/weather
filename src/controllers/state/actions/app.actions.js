@@ -2,7 +2,9 @@ import {
 	UPDATE_WEATHER_FROM_COORDS,
 	UPDATE_WEATHER_FROM_STRING,
 	UPDATE_SEARCHED_LOCATIONS,
-	SET_LOADING
+	SET_LOADING,
+	SETUP_APP_STATE,
+	DISABLE_CURRENT_LOCATION
 } from '../../../constants';
 
 export function setLoading(dispatch, isLoading) {
@@ -47,4 +49,12 @@ export function updateWeatherBasedOnName(dispatch, weatherData, locationName) {
 
 	dispatch(weatherUpdateAction);
 	dispatch(searchedLocations);
+}
+
+export function setupAppState(dispatch, data) {
+	dispatch({ type: SETUP_APP_STATE, payload: data });
+}
+
+export function currentLocationEnabled(dispatch, shouldDisable) {
+	dispatch({ type: DISABLE_CURRENT_LOCATION, payload: shouldDisable });
 }
