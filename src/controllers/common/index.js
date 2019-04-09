@@ -18,7 +18,6 @@ export function GetCoordsCtrl(dispatch) {
 				GetWeatherForCoordsCtrl(dispatch, position.coords);
 			},
 			function(error) {
-				console.log(error);
 				currentLocationEnabled(dispatch, false);
 			}
 		);
@@ -45,7 +44,6 @@ export function GetWeatherByStringCtrl(dispatch, name) {
 	setLoading(dispatch, true);
 	getWeatherByName(name)
 		.then((res) => {
-			console.log(res.data.current);
 			updateWeatherBasedOnName(dispatch, res.data, name);
 		})
 		.catch((e) => {

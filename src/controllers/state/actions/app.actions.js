@@ -24,7 +24,8 @@ export function updateGeolocationAction(dispatch, coords, weatherData) {
 				longitude: coords.longitude
 			},
 			weather: weatherData.current,
-			location: weatherData.location
+			location: weatherData.location,
+			currentLocationEnabled: true
 		},
 		type: UPDATE_WEATHER_FROM_COORDS
 	};
