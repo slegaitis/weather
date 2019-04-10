@@ -1,6 +1,3 @@
-## Demo
-
-https://weather-app-reactjs.netlify.com/
 
 ## Available Scripts
 
